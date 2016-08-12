@@ -1,5 +1,5 @@
 PImage bg1, bg2, enemy, fighter, treasure, hp, end1, end2, start1, start2;
-int a, b, c, d,e,f, speed_fighter, speed_enemy, fighterX, fighterY,bg_1, bg_2,gameState,enemyState;
+int a, b, c, d,e,f, speed_fighter, speed_enemy, fighterX, fighterY,bg_1, bg_2,gameState,enemyState,enemyCount;
 boolean upPressed,downPressed,leftPressed,rightPressed;
 final int game_start=0;
 final int game_run=1;
@@ -33,6 +33,7 @@ void setup () {
   gameState=game_start;
   fighterX=fighterY=0;
   upPressed=downPressed=leftPressed=rightPressed=false;
+  enemyCount=5;
 }
 
 void draw() {
@@ -123,18 +124,19 @@ void draw() {
        }
        break;
        case enemy_3:
-        for(float i=0;i<200;i+=40){
-           if(i<120){
-           image(enemy, d-i, e+i);
-           image(enemy, d-i, e-i);
+        for(float i=0;i<enemyCount;i++){
+           if(i<(enemyCount-1)/2){
+           image(enemy, d-i*50, e+i*50);
+           image(enemy, d-i*50, e-i*50);
            }
-           if(i==120){
-             image(enemy, d-i,e+i-80);
-             image(enemy, d-i,e-i+80);
+           else if(i==(enemyCount+1)/2){
+               image(enemy, d-i*40,e+i*50-(enemyCount-1)*25);
+               image(enemy, d-i*40,e-i*50+(enemyCount-1)*25);
+             
            }
-           if(i==160){
-             image(enemy, d-i, e+i-160);
-             image(enemy, d-i, e-i+160);
+           else{
+             image(enemy, d-i*40, e+i*50-(enemyCount-1)*50);
+             image(enemy, d-i*40, e-i*50+(enemyCount-1)*50);
            }
            if(d>1040){
               enemyState=enemy_1;
